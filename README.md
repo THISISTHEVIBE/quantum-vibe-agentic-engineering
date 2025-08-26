@@ -103,13 +103,6 @@ To democratize access to quantum computing capabilities through our innovative A
 
 QuantumVibe envisions a world where quantum computing is as accessible as cloud computing, where AI and quantum algorithms work seamlessly together to solve humanity's greatest challenges, and where the metaverse becomes a reality powered by quantum-enhanced experiences.
 
-## 📞 Contact Information
-
-- **Website**: [quantumvibe.ai](https://quantumvibe.ai)
-- **Email**: hello@quantumvibe.ai
-- **LinkedIn**: [QuantumVibe](https://linkedin.com/company/quantumvibe)
-- **Twitter**: [@QuantumVibeAI](https://twitter.com/QuantumVibeAI)
-
 ---
 
 *"The future is quantum. The future is now."* - QuantumVibe Team
