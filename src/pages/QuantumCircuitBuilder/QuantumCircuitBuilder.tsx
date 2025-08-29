@@ -30,6 +30,7 @@ import {
 } from '@mui/icons-material'
 import { motion, AnimatePresence } from 'framer-motion'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts'
+import QuantumCircuit3D from '../../components/3D/QuantumCircuit3D'
 
 interface QuantumGate {
   id: string
@@ -60,6 +61,7 @@ const QuantumCircuitBuilder: React.FC = () => {
   const [selectedGate, setSelectedGate] = useState<string>('H')
   const [isSimulating, setIsSimulating] = useState(false)
   const [simulationResults, setSimulationResults] = useState<any>(null)
+  const [show3DView, setShow3DView] = useState(false)
 
   const availableGates = [
     { type: 'H', name: 'Hadamard', description: 'Creates superposition state' },
@@ -87,6 +89,17 @@ const QuantumCircuitBuilder: React.FC = () => {
       gates: [...prev.gates, newGate],
     }))
   }, [])
+
+  // Convert 2D gates to 3D format for visualization
+  const get3DGates = useCallback(() => {
+    return circuit.gates.map(gate => ({
+      id: gate.id,
+      type: gate.type,
+      position: [gate.x / 100, gate.qubit * 2 - (circuit.qubits - 1), 0] as [number, number, number],
+      qubit: gate.qubit,
+      parameters: gate.parameters,
+    }))
+  }, [circuit.gates, circuit.qubits])
 
   const removeGate = useCallback((gateId: string) => {
     setCircuit(prev => ({
@@ -327,6 +340,15 @@ const QuantumCircuitBuilder: React.FC = () => {
                 >
                   Save Circuit
                 </Button>
+                
+                <Button
+                  variant="outlined"
+                  startIcon={<ScienceIcon />}
+                  onClick={() => setShow3DView(!show3DView)}
+                  sx={{ mt: 1 }}
+                >
+                  {show3DView ? 'Hide 3D View' : 'Show 3D View'}
+                </Button>
               </Box>
 
               {circuit.gates.length > 0 && (
@@ -348,28 +370,36 @@ const QuantumCircuitBuilder: React.FC = () => {
           <Card className="hover-lift">
             <CardContent sx={{ p: 3 }}>
               <Typography variant="h6" sx={{ fontWeight: 600, mb: 3 }}>
-                Circuit Canvas
+                {show3DView ? '3D Circuit Visualization' : 'Circuit Canvas'}
               </Typography>
               
-              <Box
-                sx={{
-                  position: 'relative',
-                  minHeight: 400,
-                  bgcolor: 'rgba(0, 0, 0, 0.3)',
-                  border: '2px solid rgba(0, 212, 255, 0.3)',
-                  borderRadius: 2,
-                  overflow: 'hidden',
-                }}
-                className="quantum-circuit"
-              >
-                {/* Qubit lines */}
-                {Array.from({ length: circuit.qubits }, (_, i) => renderQubitLine(i))}
-                
-                {/* Placed gates */}
-                <AnimatePresence>
-                  {circuit.gates.map(renderGate)}
-                </AnimatePresence>
-              </Box>
+              {show3DView ? (
+                <QuantumCircuit3D
+                  gates={get3DGates()}
+                  qubits={circuit.qubits}
+                  isAnimating={isSimulating}
+                />
+              ) : (
+                <Box
+                  sx={{
+                    position: 'relative',
+                    minHeight: 400,
+                    bgcolor: 'rgba(0, 0, 0, 0.3)',
+                    border: '2px solid rgba(0, 212, 255, 0.3)',
+                    borderRadius: 2,
+                    overflow: 'hidden',
+                  }}
+                  className="quantum-circuit"
+                >
+                  {/* Qubit lines */}
+                  {Array.from({ length: circuit.qubits }, (_, i) => renderQubitLine(i))}
+                  
+                  {/* Placed gates */}
+                  <AnimatePresence>
+                    {circuit.gates.map(renderGate)}
+                  </AnimatePresence>
+                </Box>
+              )}
             </CardContent>
           </Card>
         </Grid>
