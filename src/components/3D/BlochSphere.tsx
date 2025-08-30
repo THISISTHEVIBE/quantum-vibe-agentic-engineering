@@ -1,6 +1,6 @@
-import React, { useRef, useMemo, useState } from 'react'
+import React, { useRef, useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { OrbitControls, Sphere, Line, Text } from '@react-three/drei'
+import { OrbitControls, Line, Text } from '@react-three/drei'
 import * as THREE from 'three'
 
 interface BlochSphereProps {
@@ -13,7 +13,7 @@ interface BlochSphereProps {
 const BlochSphere: React.FC<BlochSphereProps> = ({ theta, phi, state, isAnimating }) => {
   const sphereRef = useRef<THREE.Mesh>(null)
   const stateVectorRef = useRef<THREE.Group>(null)
-  const [hovered, setHovered] = useState(false)
+
 
   // Calculate state vector position on Bloch sphere
   const stateVectorPosition = useMemo(() => {
@@ -24,7 +24,7 @@ const BlochSphere: React.FC<BlochSphereProps> = ({ theta, phi, state, isAnimatin
   }, [theta, phi])
 
   // Animate sphere rotation
-  useFrame((state) => {
+  useFrame(() => {
     if (sphereRef.current && isAnimating) {
       sphereRef.current.rotation.y += 0.005
     }
@@ -62,8 +62,7 @@ const BlochSphere: React.FC<BlochSphereProps> = ({ theta, phi, state, isAnimatin
         {/* Bloch sphere surface */}
         <mesh
           ref={sphereRef}
-          onPointerOver={() => setHovered(true)}
-          onPointerOut={() => setHovered(false)}
+
         >
           <sphereGeometry args={[1, 32, 32]} />
           <meshStandardMaterial

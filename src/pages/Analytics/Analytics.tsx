@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Box,
   Grid,
@@ -26,14 +26,11 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Slider,
-  TextField,
+
 } from '@mui/material'
 import {
   Analytics as AnalyticsIcon,
-  TrendingUp as TrendingIcon,
-  Speed as SpeedIcon,
-  Memory as MemoryIcon,
+
   Psychology as PsychologyIcon,
   Science as ScienceIcon,
   Timeline as TimelineIcon,

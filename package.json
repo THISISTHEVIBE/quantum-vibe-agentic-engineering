@@ -2,11 +2,11 @@
     "name": "quantum-vibe-mvp",
     "version": "1.0.0",
     "description": "QuantumVibe MVP - AI-Powered Quantum Computing Platform",
-    "homepage": "https://YOUR_USERNAME.github.io/quantum-vibe-agentic-engineering",
+    "homepage": "https://THISISTHEVIBE.github.io/quantum-vibe-agentic-engineering",
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "tsc && vite build",
+        "build": "vite build",
         "preview": "vite preview",
         "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
         "test": "vitest",

@@ -8,10 +8,7 @@ import {
   Button,
   Chip,
   LinearProgress,
-  Avatar,
-  IconButton,
   useTheme,
-  Slider,
   FormControl,
   InputLabel,
   Select,
@@ -22,9 +19,7 @@ import {
 } from '@mui/material'
 import {
   Psychology as PsychologyIcon,
-  TrendingUp as TrendingIcon,
-  Speed as SpeedIcon,
-  Memory as MemoryIcon,
+
   PlayArrow as PlayIcon,
   Stop as StopIcon,
   Refresh as RefreshIcon,
@@ -33,21 +28,20 @@ import {
   Settings as SettingsIcon,
   Timeline as TimelineIcon,
   CheckCircle as CheckIcon,
-  Warning as WarningIcon,
   Error as ErrorIcon,
 } from '@mui/icons-material'
 import { motion, AnimatePresence } from 'framer-motion'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, ScatterChart, Scatter } from 'recharts'
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import BlochSphere from '../../components/3D/BlochSphere'
 
-interface NeuralNetworkLayer {
-  id: string
-  type: 'input' | 'hidden' | 'output'
-  neurons: number
-  activation: string
-  weights: number[][]
-  biases: number[]
-}
+// interface NeuralNetworkLayer {
+//   id: string
+//   type: 'input' | 'hidden' | 'output'
+//   neurons: number
+//   activation: string
+//   weights: number[][]
+//   biases: number[]
+// }
 
 interface OptimizationJob {
   id: string
@@ -67,7 +61,7 @@ interface OptimizationJob {
 
 const AIOptimization: React.FC = () => {
   const theme = useTheme()
-  const [selectedJob, setSelectedJob] = useState<OptimizationJob | null>(null)
+  // const [selectedJob, setSelectedJob] = useState<OptimizationJob | null>(null)
   const [isTraining, setIsTraining] = useState(false)
   const [trainingProgress, setTrainingProgress] = useState(0)
   const [quantumState, setQuantumState] = useState({ theta: Math.PI / 4, phi: Math.PI / 4 })
@@ -131,7 +125,7 @@ const AIOptimization: React.FC = () => {
   ])
 
   // Mock training data
-  const [trainingMetrics, setTrainingMetrics] = useState({
+  const [trainingMetrics] = useState({
     loss: [0.5, 0.3, 0.2, 0.15, 0.12, 0.1, 0.08, 0.06, 0.05, 0.04],
     accuracy: [0.6, 0.75, 0.85, 0.9, 0.92, 0.94, 0.96, 0.97, 0.98, 0.99],
     quantumAdvantage: [0.1, 0.15, 0.18, 0.2, 0.22, 0.24, 0.25, 0.26, 0.27, 0.28],
@@ -499,7 +493,7 @@ const AIOptimization: React.FC = () => {
                         bgcolor: 'rgba(0, 212, 255, 0.05)',
                       },
                     }}
-                    onClick={() => setSelectedJob(job)}
+                    onClick={() => {/* setSelectedJob(job) */}}
                   >
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
                       <Box sx={{ color: getStatusColor(job.status) }}>
